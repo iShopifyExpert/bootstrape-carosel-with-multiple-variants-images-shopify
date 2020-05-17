@@ -232,7 +232,7 @@
             $(this).closest('form').find('.single-option-selector').eq(optionIndex).val(optionValue).trigger('change');
             $('.carousel').hide();
             $('#myCarousel-'+$(this).data('slidevalue')).show();
-            $('#myCarousel-'+$(this).data('slidevalue')).find('.item').removeClass('active').first().addClass('active');
+            //$('#myCarousel-'+$(this).data('slidevalue')).find('.item').removeClass('active').first().addClass('active');
           });
         });
         var selectCallback = function(variant, selector) {
