@@ -1,0 +1,313 @@
+<script src="//cdn.shopify.com/s/files/1/0026/0515/4413/t/15/assets/bootstrap.min.js?2127" type="text/javascript"></script>
+<link href="//cdn.shopify.com/s/files/1/0026/0515/4413/t/15/assets/bootstrap.min.css?2127" rel="stylesheet" type="text/css" media="all">
+<div class="hp-wrapper">
+  <div class="hs-store-sec1 product__image-container">
+    <div class="container">
+      <div class="hs-sec1-slider">
+      {% include 'product-images' %}
+      
+      {%comment%}
+        <ul class="hs-sec1-image-slider">{% for image in product.images %}
+          <li {% for variant in image.variants %}data-variant="{{ variant.title | split: ' / ' | first }}"{% endfor %}><div class="hs-sec1-image-item"><img src="{{ image | img_url: 'original' }}"></div></li>{% endfor %}
+        </ul>
+      {%endcomment%}
+      </div>
+      <div class="hs-product-info">{% assign product_title1 = product.title | split: ' ' | first %}{% assign product_title2 = product.title | split: ' ' | last %}
+        <h1>{{product_title1}} Oxford {{product_title2}}</h1>
+        <div id="productprice" class="">{{ product.price | money }}</div>
+        {%- form 'product', product, class:'product-form' -%}
+        <div class="hs-select-item">
+          {%- for option in product.options -%}{%- if option == 'Farve' -%}{%- include 'swatch' with option -%}{%- endif -%}{%- endfor -%}
+          <select name="id" id="productSelect" style="display:none;">{%- for variant in product.variants -%}{%- if variant.available -%}<option{% if variant == product.selected_or_first_available_variant %} selected="selected"{% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>{%- else -%}<option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>{%- endif -%}{%- endfor -%}</select>
+          <p class="sizechart"><a href="https://haraldstone.myshopify.com/pages/size-guide">Min størrelse?</a></p>
+        </div>
+        <button trpe="submit" class="hs-size-button">
+          <span class="hs-button-label">
+            Tilføj til indkøbskurven
+          </span>
+        </button>
+        {%- endform -%}
+        <!--  <p class="hs-shipping-usp">Express Home Delivery - Free over €200</p> -->
+        <div class="hp-tab-area">
+          <div class="hs-tabs-title">
+            <button class="w3-bar-item w3-button" onclick="openCity('Detail')">Detaljer</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Fit')">Størrelse og Fit</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Care')">Vaskeanvisninger</button>
+          </div>
+         
+          <div id="Detail" class="hs-tab-content city">
+            <p>{{product.description}}</p>
+          </div>
+          <div id="Fit" class="hs-tab-content city" style="display:none">
+            <p class="fit" id="31655327760439">
+              • Modellen på billedet er 180 cm høj, vejer 85 kg og bærer størrelse M.<br>• Vi gør opmærksom på at bomuld skjorter kan skrumpe 2-3%<br>• Produktet er stort i størrelsen, vi anbefaler at du vælger en størrelse mindre end normalt.
+            </p>
+            <p class="fit" id="31734123135031">
+              • Modellen på billedet er 180 cm høj, vejer 85 kg og bærer størrelse M.<br>• Vi gør opmærksom på at bomuld skjorter kan skrumpe 2-3%<br>• Produktet er stort i størrelsen, vi anbefaler at du vælger en størrelse mindre end normalt.
+            </p>
+            <p class="fit" id="31520059555895" style="display: none;">
+              • Modellen på billedet er 192 cm høj, vejer 84 kg og bærer størrelse L.<br>• Vi gør opmærksom på at bomuld skjorter kan skrumpe 2-3%<br>• Produktet er stort i størrelsen, vi anbefaler at du vælger en størrelse mindre end normalt.
+            </p>
+            <p class="fit" id="31734140305463" style="display: none;">
+              • Modellen på billedet er 192 cm høj, vejer 84 kg og bærer størrelse L.<br>• Vi gør opmærksom på at bomuld skjorter kan skrumpe 2-3%<br>• Produktet er stort i størrelsen, vi anbefaler at du vælger en størrelse mindre end normalt.
+            </p>
+            
+          </div>
+          <div id="Care" class="hs-tab-content city" style="display:none">
+            <p>
+              <li>Vask på 40°C </li><li>Hæng til tørre.</li><li>Stryg skjorten på medium temperatur.</li>
+            </p>
+          </div>
+        </div>
+<!--         <div class="hs-model-wearing">
+          <span class="hs-wearing-title">Model also wearing</span>
+          <ul>
+            <li>
+              <a href="#">
+                <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/luxury.png" width="36px">
+                <span>zip jacket 2</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/luxury.png" width="36px">
+                <span>zip jacket 2</span>
+              </a>
+            </li>
+             <li>
+              <a href="#">
+                <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/luxury.png" width="36px">
+                <span>zip jacket 2</span>
+              </a>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="hs-store-sec3">
+          <div class="hs-container">
+            
+<!--             <div class="hs-sec3-text">
+              <h2>Engineered in Portugal</h2>
+              <p>
+                The Sweatshirt is cut from a custom developed, unbrushed loopback fabric made of 100% Egyptian cotton fibers. The outside is densely knitted for a smooth hand and straight fall. The inside loopback is unbrushed to provide comfort and warmth without becoming heavy or bulky. For the neckline, cuffs and bottom, we've developed a lycra-reinforced rib-knit that provides stretch without losing shape.
+              </p>
+            </div> -->
+            <div class="hs-store-sec4">
+          <div class="hs-container">
+            <h2>Detaljer om skjorten</h2>
+            <ul>
+              <li>
+                <a href="#">
+                  <div class="hs-sec4-image">
+                    <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/2.jpg">
+                  </div>
+                  <div class="hs-sec4-text">
+                    <h3>Bomulden</h3>
+                    <p>
+                     Alle gode skjorter starter med bomulden. Vi har valgt en meget lækker og blød bomuldskvalitet, som også er meget behagelig for huden. Vores bomuld er behandlet med Sanitized®, der bevirker, at skjorten holder sig lugtfri
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="hs-sec4-image">
+                    <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/1.jpg"> 
+                  </div>
+                  <div class="hs-sec4-text">
+                    <h3>Skjorten</h3>
+                    <p>
+                      Vores skjorte har fået en tekstilbehandling, der gør, at skjorten holder sig mere frisk i løbet af dagen. Teknologien, vi benytter, er Bluesign og OEKO-TEX Standard 100 Verificeret. Dette forsikrer, at den ikke har en skadelig påvirkning på hverken din hud eller miljøet.
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="hs-sec4-image">
+                    <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/3_4a4b8f5a-199a-4bd9-a3fa-13ecfffb8a09.jpg">
+                  </div>
+                  <div class="hs-sec4-text">
+                    <h3>Ascolite®</h3>
+                    <p>
+                      Vi ved, hvor frustrerende det kan være at miste en knap. Derfor er vores knapper syet med Ascolite®. Ved hjælp af en grundig proces bestående af varmebehandling kommer knapperne til at sidde fast uden at falde af.
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+            <div class="hs-sec3-right">
+               
+              <ul>
+                <li>
+                  <a href="#">
+                    <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/t/6/assets/pf-5b30d1d5--Somelos2.jpg" class="image-di">
+                    <span>Portugal</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="https://cdn.shopify.com/s/files/1/0105/1810/2071/files/aesdl.jpg" class="image-di">
+                    <span>Rumænien</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+  </div>
+          
+  <div id="insta-feed"></div>
+</div>
+
+{% schema %}
+  {
+    "name": "Section Product",
+    "settings": []
+  }
+{% endschema %}
+
+<script>
+  function openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    document.getElementById(cityName).style.display = "block";  
+  }
+  $(document).ready(function () {
+    jQuery('.hs-sec1-image-slider').slick({
+      centerMode: false,
+      arrows: true,
+      centerPadding: '0px',
+      slidesToShow: 1,
+      slideToScroll: 1,
+      autoplay: false,
+      autoplaySpeed: 3000,
+      loop: true,
+      dots: true,
+      infinite: true,
+      customPaging: function(slider, i) {
+        return '<div class="thumbnails">' + $(slider.$slides[i]).find('img').prop('outerHTML') + '</div>';
+      }
+    });
+  });
+  var selectCallback = function(variant, selector) {
+    if (variant) {
+      if (variant.available) {
+        $('#addtocart').html('Add to Cart'); $('.addcart').removeClass('disabled').removeAttr('disabled');
+      } else {
+        $('#addtocart').html('Sold Out'); $('.addcart').addClass('disabled').attr('disabled', 'disabled');        
+      }
+      if ( variant.compare_at_price > variant.price ) {
+        $('#productprice').html('<span class="price on-sale money">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="compare-price money">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+      } else {
+        $('#productprice').html('<span class="price money">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+      }        
+    } else {
+      $('#addtocart').html('Unavailable'); $('.addcart').addClass('disabled').attr('disabled', 'disabled');
+    }
+  };
+  jQuery(function($) {
+     new Shopify.OptionSelectors('productSelect', {
+            product: {{ product | json }},
+            onVariantSelected: selectCallback,
+            enableHistoryState: true
+     }); {% if product.options.size == 1 and product.options.first != 'Title' %}
+     $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+        $('.selector-wrapper:eq(0)').append('<div class="clearfix"></div>'); {% endif %}{% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+          $('.selector-wrapper').hide(); {% endif %}
+          $('.selector-wrapper').append('<div class="clearfix"></div>');
+        });
+        jQuery(function() {
+          $('.swatch :radio').change(function() {
+            var optionIndex = $(this).closest('.swatch').attr('data-option-index');
+            var optionValue = $(this).val();
+            $(this).closest('form').find('.single-option-selector').eq(optionIndex).val(optionValue).trigger('change');
+            $('.carousel').hide();
+            $('#myCarousel-'+$(this).data('slidevalue')).show();
+            $('#myCarousel-'+$(this).data('slidevalue')).find('.item').removeClass('active').first().addClass('active');
+          });
+        });
+        var selectCallback = function(variant, selector) {
+          $('.fit').css('display', 'none');
+          $('#' + variant.id).css('display', 'block');
+        }
+</script>
+<style>
+ul.thumbnails {
+    list-style: none;
+    padding: 0;
+        max-width: 60px;
+    box-shadow: none;
+}
+ul.thumbnails a {
+    box-shadow: 3px 4px 12px -5px #7a7a7a;
+}
+a.carousel-control.left {
+    
+    left: 0;
+    cursor: url(https://cdn.shopify.com/s/files/1/0105/1810/2071/files/arrow-left.svg?v=1589577165) 40 12,auto;
+}
+a.carousel-control.right {
+    
+    right: 0;
+    cursor: url(https://cdn.shopify.com/s/files/1/0105/1810/2071/files/arrow-right.svg?v=1589577165) 40 12,auto;
+  
+}
+  
+#myCarousel img {
+    margin: 0 auto;
+}
+li.item {
+    list-style: none;
+}
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 50%;
+    color: #fff;
+    text-align: center;
+    
+    transition: opacity .15s ease;
+}
+  .carousel-control.left{
+    background-image:none;
+    background-image:none;
+    background-image: none;
+    background-image: none;
+    filter: none;
+  
+  }
+  .carousel-control.right{
+    background-image:none;
+    background-image:none;
+    background-image: none;
+    background-image: none;
+    filter: none;
+  
+  }
+  ul.thumbnailsh {
+    padding: 0;
+}
+  ul.thumbnailsh li.span2 {
+    list-style: none;
+    width: 80px;
+    float: left;
+    margin: 0px 13px;
+}
+</style>
