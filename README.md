@@ -1,0 +1,1 @@
+# bootstrape-carosel-with-multiple-variants-images-shopify
