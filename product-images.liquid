@@ -1,0 +1,44 @@
+{% for option in product.options_with_values %}{% if option.name == 'Farve' %}{% for value in option.values %}
+<div class="hidden-xs hidden-sm col-md-2" style="display:none !important">
+  <ul class="thumbnails">{% assign imgcount = imgcount | minus: imgcount %}{% for image in product.images %}{% if image.alt == value %}{% assign imgcount = imgcount | plus: 1 %}
+    <li class="span2"><a data-target="#myCarousel-{{value | handle}}" data-slide-to="{{imgcount | minus: 1}}" class="thumbnail" id="carousel-selector-{{forloop.index0}}"><img src="{{image | img_url: '100x100_cropped'}}" alt="{{image.alt | split: '|' | first | escape}}" class="img-responsive"></a></li>{% endif %}{% endfor %}
+  </ul>
+</div>
+<div class="col-md-10 carousel slide" id="myCarousel-{{value | handle}}" data-interval="false" data-wrap="false"{% if forloop.index0 > 0 %} style="display:none !important"{% endif %}>
+   <div class="carousel-inner">{% assign imgcount = imgcount | minus: imgcount %}{% for image in product.images %}{% if image.alt == value %}{% assign imgcount = imgcount | plus: 1 %}
+     <div class="item{%if imgcount == 1%} active{%endif%}" title="{{ image.alt | escape }}">
+       <img class="mySlides" src="{{ image | img_url: 'master' }}" alt="{{ image.alt | escape }}" title="{{ image.alt | escape }}" style="width:100%">
+     </div>{% endif %}{% endfor %}
+     <a class="carousel-control left" data-slide="prev" href="#myCarousel-{{value | handle}}"> </a> <a class="carousel-control right" data-slide="next" href="#myCarousel-{{value | handle}}"> </a>
+     
+     <ol class="hidden-xs hidden-sm carousel-indicators">{% assign imgcount = imgcount | minus: imgcount %}{% for image in product.images %}{% if image.alt == value %}{% assign imgcount = imgcount | plus: 1 %}
+       <li data-target="#myCarousel-{{value | handle}}" data-slide-to="{{imgcount | minus: 1}}" class="{%if forloop.first%} active{%endif%}"></li>{% endif %}{% endfor %}
+     </ol>
+  </div>
+</div>
+<div class="visible-xs"{% if forloop.index0 > 0 %} style="display:none !important"{% endif %}>
+  <ul class="thumbnailsh">{% assign imgcount = imgcount | minus: imgcount %}{% for image in product.images %}{% if image.alt == value %}{% assign imgcount = imgcount | plus: 1 %}
+    <li class="span2"><a data-target="#myCarousel-{{value | handle}}" data-slide-to="{{imgcount}}" class="thumbnail" id="carousel-selector-{{value | handle}}"><img src="{{image | img_url: '100x100_cropped'}}" alt="{{image.alt | split: '|' | first | escape}}" class="img-responsive"></a></li>{% endif %}{% endfor %}
+  </ul>
+</div>
+<script>
+  $(document).ready(function(){
+    $('a.carousel-control.left').hide();
+    $('#myCarousel-{{value | handle}}').on('slide.bs.carousel', function (e) {
+      var slidingItemsAsIndex = $(this).find('.item').length - 1;
+      if($(e.relatedTarget).index() == slidingItemsAsIndex ){
+        $(this).find('a.carousel-control.right').hide();
+      }
+      else{
+        $(this).find('a.carousel-control.right').show();
+      }
+      if($(e.relatedTarget).index() == 0){
+        $(this).find('a.carousel-control.left').hide();
+      }
+      else{
+        $(this).find('a.carousel-control.left').show();
+      }
+    });
+  });
+</script>
+{% endfor %}{% endif %}{% endfor %}
